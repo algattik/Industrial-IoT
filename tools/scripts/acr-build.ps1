@@ -84,6 +84,7 @@ else {
             # Builds from main should be built nightly and per PR in a container registry to allow testing.
             $Registry = "industrialiotdev"
         }
+    }
     elseif ($namespace.StartsWith("release/") -or ($namespace -eq "master")) {
         $namespace = "public"
         if ([string]::IsNullOrEmpty($Registry)) {
