@@ -79,7 +79,12 @@ else {
         # dev feature builds
         $namespace = $namespace.Replace("feature/", "")
     }
-    elseif ($namespace.StartsWith("release/") -or ($namespace -eq "main") -or ($namespace -eq "master")) {
+    elseif (($namespace -eq "main")) {
+        if ([string]::IsNullOrEmpty($Registry)) {
+            # Builds from main should be built nightly and per PR in a container registry to allow testing.
+            $Registry = "industrialiotdev"
+        }
+    elseif ($namespace.StartsWith("release/") -or ($namespace -eq "master")) {
         $namespace = "public"
         if ([string]::IsNullOrEmpty($Registry)) {
             # Release and Preview builds go into staging
@@ -93,7 +98,7 @@ else {
 if ([string]::IsNullOrEmpty($Registry)) {
     $Registry = $env.BUILD_REGISTRY
     if ([string]::IsNullOrEmpty($Registry)) {
-        # Feature builds by default build into dev registry
+        # Feature builds by default into dev registry
         $Registry = "industrialiotdev"
     }
 }
@@ -105,6 +110,7 @@ $sourceTag = $env:Version_Prefix
 $prereleaseTag = $env:Version_Prerelease
 if ([string]::IsNullOrEmpty($prereleaseTag))
 {
+    # This can be used on a preview branch *not* targetted for release and maintainence.
     $prereleaseTag = "-alpha"
 }
 if ([string]::IsNullOrEmpty($sourceTag)) {

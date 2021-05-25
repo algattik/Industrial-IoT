@@ -63,6 +63,7 @@ call :retrieve_spec twin
 call :retrieve_spec publisher
 call :retrieve_spec registry
 call :retrieve_spec events
+call :retrieve_spec history
 popd
 goto :eof
 

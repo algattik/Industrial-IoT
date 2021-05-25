@@ -3,6 +3,14 @@ name: $(Date:yyyyMMdd)$(Rev:rr)
 trigger: none
 pr: none
 
+schedules:
+- cron: "0 10 * * *"
+  displayName: Nightly build of main branch.
+  branches:
+    include:
+    - main
+  always: true
+
 pool:
   name: '$(AgentPool)'
 
