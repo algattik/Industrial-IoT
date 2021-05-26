@@ -4,7 +4,7 @@ trigger: none
 pr: none
 
 pool:
-  name: '$(AgentPool)'
+  vmImage: 'ubuntu-latest'
 
 variables:
 - template: steps/variables.yml
