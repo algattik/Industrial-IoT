@@ -7,8 +7,6 @@ steps:
     includePreviewVersions: false
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
-- bash: find $(Build.SourcesDirectory)
-
 - task: CmdLine@2
   displayName: 'Run dotnet publish for TestEventProcessor'
   timeoutInMinutes: 90
