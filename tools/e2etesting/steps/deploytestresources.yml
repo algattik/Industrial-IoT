@@ -16,6 +16,7 @@ steps:
     arguments: >
       -ResourceGroupName "$(ResourceGroupName)"
       -UsePrivateIp $false
+      -NumberOfSimulations 1
 
 - task: AzureCLI@2
   displayName: "Deploy containers with simulated PLCs with private ips"
